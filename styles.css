@@ -167,7 +167,7 @@ section h2::after{
    
 }
 .profile-figure img{
-   aspect-ratio: 1/1;
+    aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 50%;
     border: 5px solid var(--primary);

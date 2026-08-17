@@ -61,5 +61,70 @@ window.addEventListener('scroll', () =>{
  if(link.getAttribute('href') === `#${current}`) {
  link.classList.add('active');
  }
- })
 })
+})
+//Day 10 - Project Filter System
+const projects =[
+ { 
+   id: 1, 
+   name: "Weather App", 
+   category: "web", 
+   tech: ["React", "API"],
+   image: "images/weather.jpeg"
+ },
+ { 
+   id: 2, 
+   name: "Todo App", 
+   category: "web", 
+   tech: ["JavaScript"],
+   image: "images/todo.jpeg"
+ },
+ { 
+   id: 3, 
+   name: "Portfolio", 
+   category: "design", 
+   tech: ["HTML", "CSS"],
+   image: "images/portfolio.jpeg"
+ },
+ { 
+   id: 4, 
+   name: "Calculator", 
+   category: "web", 
+   tech: ["JavaScript"],
+   image: "images/calculator.jpeg"
+ }
+];
+
+function renderProjects(filter="all") {
+ const grid = document.querySelector('.projects-grid');
+ const filtered = filter === "all"
+ ? projects
+ : projects.filter(p => p.category === filter);
+
+ grid.innerHTML = filtered.map(project =>
+ `<article class="project-card">
+ <img src="${project.image}" alt="${project.name} screenshot">
+
+ <div class="project-card-body">
+ <h3>${project.name}</h3>
+ <div class="project-tags">
+ ${project.tech.map(t => `<span class="tag">${t}</span>`).join('')} 
+ </div>
+ <a href="#" class=" btn btn-primary">View Project</a>
+ </div>
+ </article>
+ `).join('');
+}
+
+//Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn =>{
+ btn.addEventListener('click',()=>{
+ document.querySelectorAll('.filter-btn').forEach(b =>
+ b.classList.remove('active'));
+ btn.classList.add('active')
+ renderProjects(btn.dataset.filter);
+});
+ });
+
+//Intial render
+renderProjects();
